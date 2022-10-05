@@ -4,11 +4,12 @@ import {
     Entity,
     PrimaryGeneratedColumn,
     Unique,
-    UpdateDateColumn,
+    UpdateDateColumn
   } from 'typeorm';
-  @Unique(['email'])
-  @Entity('book')
-  export class Book {
+import { Userstatus } from '../users.model';
+@Unique(['email'])
+  @Entity('user')
+  export class User {
     @PrimaryGeneratedColumn('uuid')
     Id: string;
   
@@ -21,16 +22,14 @@ import {
     @Column({ length: 256 })
     email: string;
   
+    @Column({ default: Userstatus.active })
+    status: Userstatus;
+  
     @Column({ type: 'bigint', nullable: true })
     mobileNo: string;
   
     @Column()
     password: string;
-      @Column({ length: 80, nullable: true })
-    createdBy: string;
-  
-    @Column({ length: 80, nullable: true })
-    updatedBy: string;
   
     @CreateDateColumn()
     createdAt: 'datetime';
